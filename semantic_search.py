@@ -8,11 +8,12 @@ import sqlite3
 
 st.markdown(f"SQLITE: {sqlite3.sqlite_version}")
 
-# import chromadb
-#
-# client = chromadb.PersistentClient(path="chromaDB")
-# st.sidebar.markdown("# Database")
-# collection_name = st.sidebar.selectbox('Choose Database', [c.name for c in client.list_collections()], 0, label_visibility='collapsed')
+import chromadb
+
+client = chromadb.PersistentClient(path="chromaDB")
+st.sidebar.markdown("# Database")
+collection_name = st.sidebar.selectbox('Choose Database', [c.name for c in client.list_collections()], 0, label_visibility='collapsed')
+
 # collection = client.get_collection(name=collection_name)
 # collection_info = ""
 #
