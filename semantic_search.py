@@ -48,7 +48,7 @@ st.header(f"_:blue[Fully Local Semantic Search]_")
 st.markdown(
     f"The following search query, will be embedded into a {collection._model.dimension}-dimensional vector."
     f" Afterwards, this embedding is used to identify the {n_results} closest documents according to the '{collection.get_model().metadata.get('hnsw:space')}' similarity."
-    f"The collection _'{collection_name}'_ with {collection.count()} documents."
+    f" The collection _'{collection_name}'_ contains {collection.count()} documents."
 )
 
 question = st.text_input("Search question:", "Who is omnipotent?")
@@ -58,7 +58,11 @@ results = collection.query(query_texts=[question], n_results=n_results, include=
 
 if st.button("Ask a question"):
     st.divider()
-    st.write(f"The current question is _'{question}'_. Below you will find the top {n_results} answer-documents.")
+    st.write(
+        f"The current question is _'{question}'_."
+        f" Below you will find the top {n_results} answer-documents, i.e., the {n_results} documents, for which the embeddings are the closest."
+        f" For each document the source URL and a teaser text is provided."
+    )
 
 
     tabs = st.tabs([results['metadatas'][0][i]['title'] for i in range(n_results)])
