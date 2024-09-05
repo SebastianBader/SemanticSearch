@@ -54,7 +54,7 @@ st.markdown(
 question = st.text_input("Search question:", "Who is omnipotent?")
 
 
-results = collection.query(query_texts=[question], n_results=n_results, include=['metadatas', 'documents'])
+results = collection.query(query_texts=[question], n_results=n_results, include=['metadatas', 'documents', 'distances'])
 
 if st.button("Ask a question"):
     st.divider()
