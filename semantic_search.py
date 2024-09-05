@@ -11,18 +11,21 @@ st.markdown(f"SQLITE: {sqlite3.sqlite_version}")
 import chromadb
 
 client = chromadb.PersistentClient(path="chromaDB")
-st.sidebar.markdown("# Database")
-collection_name = st.sidebar.selectbox('Choose Database', [c.name for c in client.list_collections()], 0, label_visibility='collapsed')
+st.sidebar.markdown("# Collection")
+# collection_name = st.sidebar.selectbox('Choose Database', [c.name for c in client.list_collections()], 0, label_visibility='collapsed')
 
+collection_name = "wikipedia_truncated"
 collection = client.get_collection(name=collection_name) 
 collection_info = ""
+
+collection_info += f"### Information\n"
+collection_info += f"- Collection Name: '{collection_name}'\n"
+collection_info += f"- Embedding dimension: {collection._model.dimension}\n"
 
 if 'description' in collection.metadata:
     collection_info += f"### Description\n"
     collection_info += "_"+collection.metadata['description'] +"_\n"
 
-collection_info += f"### Information\n"
-collection_info += f"- Dimension: {collection._model.dimension}\n"
 
 
 st.sidebar.markdown(collection_info)
