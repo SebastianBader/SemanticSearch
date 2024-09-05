@@ -19,7 +19,7 @@ collection = client.get_collection(name=collection_name)
 collection_info = ""
 
 collection_info += f"### Information\n"
-collection_info += f"- Collection Name: '{collection_name}'\n"
+collection_info += f"- Name: '{collection_name}'\n"
 collection_info += f"- Embedding dimension: {collection._model.dimension}\n"
 
 if 'description' in collection.metadata:
