@@ -6,7 +6,6 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import sqlite3
 
-st.markdown(f"SQLITE: {sqlite3.sqlite_version}")
 
 import chromadb
 
@@ -26,6 +25,9 @@ if 'description' in collection.metadata:
     collection_info += f"### Description\n"
     collection_info += "_"+collection.metadata['description'] +"_\n"
 
+
+collection_info += f"### System\n"
+collection_info += f"- SQLite: '{sqlite3.sqlite_version}'\n"
 
 
 st.sidebar.markdown(collection_info)
