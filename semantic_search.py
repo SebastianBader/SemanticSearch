@@ -10,6 +10,9 @@ import sqlite3
 import chromadb
 
 client = chromadb.PersistentClient(path="chromaDB")
+
+st.set_page_config(initial_sidebar_state="collapsed")
+
 st.sidebar.markdown("# Collection")
 # collection_name = st.sidebar.selectbox('Choose Database', [c.name for c in client.list_collections()], 0, label_visibility='collapsed')
 
