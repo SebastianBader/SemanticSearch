@@ -69,10 +69,11 @@ if st.button("Ask a question"):
 
     for i in range(n_results):
         metadata = results['metadatas'][0][i]
+        distance = results['distances'][0][i]
         with tabs[i]:
             if 'title' in metadata:
                 st.header(metadata['title'])
             if 'url' in metadata:
                 st.page_link(metadata['url'], icon="🔗", label=f"{metadata['url']}")
             st.markdown('<i>'+results['documents'][0][i].split('\n')[0]+'…</i>', unsafe_allow_html=True)
- 
+            st.markdown(f"* distance between embeddings: {distance:.3g}")
