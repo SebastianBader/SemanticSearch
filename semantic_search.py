@@ -23,6 +23,8 @@ collection_info = ""
 collection_info += f"### Information\n"
 collection_info += f"- Name: '{collection_name}'\n"
 collection_info += f"- Embedding dimension: {collection._model.dimension}\n"
+collection_info += f"- Number of documents: {collection.count()} documents\n"
+
 
 if 'description' in collection.metadata:
     collection_info += f"### Description\n"
@@ -39,14 +41,18 @@ st.sidebar.markdown(collection_info)
 # # Information:
 # - Distance norm: '{collection._model.configuration_json['hnsw_configuration']['space']}'
 # """)
+n_results = 5
 
 
 st.header(f"_:blue[Fully Local Semantic Search]_")
-st.subheader(f"Selected database: _'{collection_name}'_ with {collection.count()} documents")
+st.markdown(
+    f"The following search query, will be embedded into a {collection._model.dimension}-dimensional vector."
+    " Afterwards, this embedding is used to identify the {n_results} closest documents according to the '{collection.get_model().metadata.get('hnsw:space')}' similarity."
+    "The collection _'{collection_name}'_ with {collection.count()} documents."
+)
 
 question = st.text_input("Search question:", "Who is omnipotent?")
 
-n_results = 5
 
 results = collection.query(query_texts=[question], n_results=n_results, include=['metadatas', 'documents'])
 
